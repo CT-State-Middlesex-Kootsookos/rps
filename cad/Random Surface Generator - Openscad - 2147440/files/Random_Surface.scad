@@ -2,7 +2,7 @@
  
  X=15; Y=15; // this is 12 x 12 , 144 combinations
  
- resize(newsize=[100,100,10])  // change here to adjust rough size
+ resize(newsize=[100,100,15])  // change here to adjust rough size
  
 // difference()
  {    
@@ -27,8 +27,7 @@
 
         translate([x,y,single_rand  +4])rotate([x,y,single_rand*10])
 
-        resize(newsize=[5,5
-        ,8])    sphere(r=4 ,$fn=single_rand+3);
+        resize(newsize=[5,5,10])    sphere(r=8 ,$fn=single_rand+3);
     }
      ;
      translate([0,0,-1]) cube(size = [X,Y,10], center =  false); 
