@@ -9,13 +9,17 @@ module top (
 	output LED4,
 	output LED5,
 
-	input BTN_N,
 	input BTN1,
 	input BTN2,
 	input BTN3,
 
-	output LEDR_N,
-	output LEDG_N,
+	input P1A1,
+	input P1A2,
+	input P1A3,
+
+	output P1A10,
+	output P1A9,
+	output P1A8
 );
 
 	localparam ROCK = 1;
@@ -27,7 +31,7 @@ module top (
 	localparam TIE = 4; // Middle
 
 	localparam LOG2DELAY = 200; /* 2162 Was 22; */
-	localparam BIT_FOR_DELAY = 25;
+	localparam BIT_FOR_DELAY = 26;
 
 	reg [LOG2DELAY-1:0] counter = 0;
 	reg [1:0] person_choice;
@@ -40,13 +44,13 @@ module top (
 	always @(posedge CLK) 
 	begin
 		counter <= counter + 1;
-		if (BTN1 || BTN2 || BTN3)
+		if (BTN1 || BTN2 || BTN3 || !P1A1 || !P1A2 || !P1A3)
 		begin
-			if (BTN1 && (person_choice == 0))
+			if ((BTN1 || !P1A1) && (person_choice == 0))
 				person_choice = ROCK;
-			if (BTN2 && (person_choice == 0))		
+			if ((BTN2 || !P1A2) && (person_choice == 0))		
 				person_choice = PAPER;
-			if (BTN3 && (person_choice == 0))		
+			if ((BTN3 || !P1A3) && (person_choice == 0))		
 				person_choice = SCISSORS;
 
 			if (score_set == 0)
@@ -89,5 +93,6 @@ module top (
 	end
 
 	assign {LED1, LED2, LED3} = score;
+	assign {P1A10, P1A9, P1A8} = score;
 
 endmodule
