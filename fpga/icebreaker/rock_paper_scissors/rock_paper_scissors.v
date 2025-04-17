@@ -40,12 +40,14 @@ module top (
 	reg [2:0] score = 7;
 	reg [0:0] score_set = 0;
 	reg [0:0] start_value = 0;
+	reg [0:0] flash_leds = 1;
 
 	always @(posedge CLK) 
 	begin
 		counter <= counter + 1;
 		if (BTN1 || BTN2 || BTN3 || !P1A1 || !P1A2 || !P1A3)
 		begin
+			flash_leds = 0;
 			if ((BTN1 || !P1A1) && (person_choice == 0))
 				person_choice = ROCK;
 			if ((BTN2 || !P1A2) && (person_choice == 0))		
@@ -89,12 +91,15 @@ module top (
 					score_set = 0;
 					score_choice = 0;
 					person_choice = 0;
-					if (counter[BIT_FOR_DELAY-4])
-						score = 3;
-					else
-						score = 4;
+					flash_leds = 1;
 				end
 			end
+		if (flash_leds)
+			if (counter[BIT_FOR_DELAY-7])
+				score = 3;
+			else
+				score = 4;
+
 	end
 
 	assign {LED1, LED2, LED3} = score;
