@@ -2,7 +2,7 @@
  
  X=15; Y=15; // this is 12 x 12 , 144 combinations
  
- resize(newsize=[90,90,10])  // change here to adjust rough size
+ resize(newsize=[100,100,10])  // change here to adjust rough size
  
 // difference()
  {    
