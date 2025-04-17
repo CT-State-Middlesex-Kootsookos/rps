@@ -27,13 +27,13 @@ module top (
 	localparam TIE = 4; // Middle
 
 	localparam LOG2DELAY = 200; /* 2162 Was 22; */
-	localparam BIT_FOR_DELAY = 26;
+	localparam BIT_FOR_DELAY = 25;
 
 	reg [LOG2DELAY-1:0] counter = 0;
 	reg [1:0] person_choice;
 	reg [1:0] computer_choice;
 	reg [2:0] score_choice = 0;
-	reg [2:0] score = 0;
+	reg [2:0] score = 7;
 	reg [0:0] score_set = 0;
 	reg [0:0] start_value = 0;
 
@@ -82,7 +82,7 @@ module top (
 			if (counter[BIT_FOR_DELAY] != start_value)
 			begin
 				score_set = 0;
-				score = 0;
+				score = 7;
 				score_choice = 0;
 				person_choice = 0;
 			end
