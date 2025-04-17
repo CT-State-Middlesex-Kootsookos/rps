@@ -83,15 +83,17 @@ module top (
 			end
 		end
 		else
-			if (counter[BIT_FOR_DELAY] != start_value)
 			begin
-				score_set = 0;
-				if (counter[BIT_FOR_DELAY-3])
-					score = 3;
-				else
-					score = 4;
-				score_choice = 0;
-				person_choice = 0;
+				if (counter[BIT_FOR_DELAY] != start_value)
+				begin
+					score_set = 0;
+					score_choice = 0;
+					person_choice = 0;
+					if (counter[BIT_FOR_DELAY-4])
+						score = 3;
+					else
+						score = 4;
+				end
 			end
 	end
 
