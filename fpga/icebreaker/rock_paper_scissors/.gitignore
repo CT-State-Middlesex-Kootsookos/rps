@@ -1,4 +1,4 @@
-./*.asc
-./*.json
-./*.log
-./*.bin
+*.asc
+*.json
+*.log
+*.bin
