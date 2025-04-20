@@ -14,7 +14,7 @@ difference()
     union()
     {
     translate([-5,55,10]) rotate([0,90,0]) cylinder(11,4,4);
-    translate([100,55,10]) rotate([0,90,0]) cylinder(11,2.4,2.4);
+    translate([100,55,10]) rotate([0,90,0]) cylinder(11,2.7,2.7);
     }
 }
 
