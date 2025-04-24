@@ -36,23 +36,32 @@ module top (
 	reg [LOG2DELAY-1:0] counter = 0;
 	reg [1:0] person_choice;
 	reg [1:0] computer_choice;
-	reg [2:0] score_choice = 0;
-	reg [2:0] score = 7;
+	reg [2:0] score_choice = TIE;
+	reg [2:0] score = TIE;
+	reg [2:0] led_flashing = PERSON_WINS;
 	reg [0:0] score_set = 0;
 	reg [0:0] start_value = 0;
 	reg [0:0] flash_leds = 1;
+	reg [0:0] button_rock = 0;
+	reg [0:0] button_paper = 0;
+	reg [0:0] button_scissors = 0;
 
 	always @(posedge CLK) 
 	begin
 		counter <= counter + 1;
-		if (BTN1 || BTN2 || BTN3 || !P1A1 || !P1A2 || !P1A3)
+
+		button_rock = BTN1 || !P1A1;
+		button_paper = BTN2 || !P1A2;
+		button_scissors = BTN3 || !P1A3;
+
+		if (button_rock || button_paper || button_scissors)
 		begin
 			flash_leds = 0;
-			if ((BTN1 || !P1A1) && (person_choice == 0))
+			if (button_rock && (person_choice == 0))
 				person_choice = ROCK;
-			if ((BTN2 || !P1A2) && (person_choice == 0))		
+			if (button_paper && (person_choice == 0))		
 				person_choice = PAPER;
-			if ((BTN3 || !P1A3) && (person_choice == 0))		
+			if (button_scissors && (person_choice == 0))		
 				person_choice = SCISSORS;
 
 			if (score_set == 0)
@@ -95,11 +104,14 @@ module top (
 				end
 			end
 		if (flash_leds)
-			if (counter[BIT_FOR_DELAY-7])
-				score = 3;
+		begin
+			if (counter[BIT_FOR_DELAY-5])
+				led_flashing = TIE;
 			else
-				score = 4;
-
+				led_flashing = COMPUTER_WINS | PERSON_WINS;
+								
+			score = led_flashing;
+		end
 	end
 
 	assign {LED1, LED2, LED3} = score;
