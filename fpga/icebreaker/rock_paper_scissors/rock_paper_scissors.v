@@ -1,4 +1,4 @@
-/* Small test design actuating all IO on the iCEBreaker dev board. */
+/* Rock-Paper-Scissors game */
 
 module top (
 	input  CLK,
